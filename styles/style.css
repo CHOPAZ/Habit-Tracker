@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+	font-family: 'Comfortaa', cursive;
+	margin: 0;
+	background-color: #F3F6FD;
+	font-weight: 400;
+}
+
+/* -------Позиционирование левой боковой панели и контекта------- */
+.app {
+  display: flex;
+}
+
+/* ----------------------Боковая панель ---------------- */
+.panel {
+  background: #FBFAFF;
+	min-height: 100vh;
+	padding: 30px;
+}
+
+/* --------------------Меню боковой панели -------------*/
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu__item {
+  background: #FFFFFF;
+  box-shadow: 0px 8px 14px rgba(62, 107, 224, 0.12);
+  border-radius: 14px;
+  border: none;
+  height: 45px;
+	width: 45px;
+	cursor: pointer;
+}
+
+.menu__item:hover {
+	background: #6A6AFB;
+}
+
+/* При наведении на иконку происходит инверсия цвета картинки иконки */
+.menu__item:hover img {
+	filter: brightness(0) invert(1);
+}
+
+.menu__item_active {
+	background: #5051F9;
+}
+
+.menu__item_active img {
+	filter: brightness(0) invert(1);
+}
+
+.menu__add-item {
+  border: 1px solid #CAD5FF;
+	border-radius: 14px;
+	background: none;
+	height: 45px;
+	width: 45px;
+	cursor: pointer;
+}
+
+.menu__add-item:hover {
+	background: #E7EBFF;
+}
+
+
+/* Основной контент */
+.content {
+  background-color: blue;
+  flex-grow: 1;
+}
+
+/* Логотип боковый панели */
+.logo {
+	margin-bottom: 50px;
+}
