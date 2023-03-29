@@ -143,3 +143,104 @@ h1 {
 	border-radius: 4px;
 	background: #5051F9;
 }
+
+/* main */
+
+main {
+  margin-top: 30px;
+}
+
+.habbit {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  background: #FFFFFF;
+	border-radius: 10px;
+}
+
+.habbit__day {
+  background: #FBFAFF;
+	border-right: 1px solid #E7EBFB;
+	border-radius: 10px 0 0 10px;
+  padding: 20px 40px;
+  font-size: 14px;
+	line-height: 16px;
+  min-width: 150px;
+}
+
+/* day 1 */
+.habbit__comment {
+  font-size: 16px;
+	line-height: 18px;
+	color: #23235F;
+	padding: 20px 25px;
+}
+
+.habbit__delete-btn {
+	margin-left: auto;
+	margin-right: 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+}
+
+.habbit__delete-btn:hover {
+	background: #6A6AFB;
+	border-radius: 5px;
+}
+.habbit__delete-btn:hover img {
+	filter: brightness(0) invert(1);
+}
+
+/* add day 2 form */
+
+.habbit__form {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  padding: 0px 10px 0px 25px;
+  position: relative;
+}
+
+.habbit__input {
+  background: #FFFFFF;
+	border: 1px solid #E7EBFB;
+	border-radius: 9px;
+	padding: 12px 45px;
+	font-family: 'Comfortaa', cursive;
+	flex: 1;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+.habbit__input::placeholder {
+	color: #8899A8;
+  /* padding-left: 45px; */
+}
+
+/* add day 2 button */
+
+.habbit__add-btn {
+  background: #EDECFE;
+	border-radius: 9px;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 14px;
+	padding: 15px 30px;
+	border: 0;
+	cursor: pointer;
+	color: #5051F9;
+}
+
+.habbit__add-btn:hover {
+  background: #6A6AFB;
+	color: #ededf5
+}
+
+.habbit__input-icon {
+  position: absolute;
+  top: 12px;
+  left: 45px;
+}
