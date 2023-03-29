@@ -21,6 +21,11 @@ body {
 	padding: 30px;
 }
 
+/* Логотип боковый панели */
+.logo {
+  margin-bottom: 50px;
+}
+
 /* --------------------Меню боковой панели -------------*/
 .menu {
   display: flex;
@@ -77,13 +82,64 @@ body {
 }
 
 
-/* Основной контент */
+/* --------------------Основной контент----------------------- */
 .content {
-  background-color: blue;
   flex-grow: 1;
+  min-width: 900px;
+	padding: 45px;
 }
 
-/* Логотип боковый панели */
-.logo {
-	margin-bottom: 50px;
+/* Заголовок */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 33px;
+  color: #000000;
+}
+
+/* Блок прогресс */
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 235px;
+}
+
+.progress__text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress__name {
+  font-size: 14px;
+  line-height: 16px;
+  color: #232360;
+}
+
+.progress__precent {
+	font-size: 12px;
+	line-height: 13px;
+	color: #768396;
+}
+
+/* Ползунок прогресса */
+.progress__bar {
+  background: #E6E9ED;
+ 	border-radius: 4px;
+	height: 5px;
+	position: relative;
+}
+
+.progress__cover-bar {
+  position: absolute;
+	width: 50%;
+	height: 5px;
+	border-radius: 4px;
+	background: #5051F9;
 }
