@@ -13,8 +13,11 @@ const page = {
     progressPrecent: document.querySelector('.progres__precent'),
     progressCoverBar: document.querySelector('.progress__cover-bar'),
   },
+  content: {
+    daysContainer: document.getElementById('days'),
+    nextDay: document.querySelector('.habbit__day'),
+  },
 };
-console.log(page.header.h1);
 
 /* Загрузка данных */
 function loadData() {
@@ -67,7 +70,6 @@ function rerenderMenu(activeHabbit) {
 }
 
 /* Рендер шапки */
-
 function rerenderHead(activeHabbit) {
   if (!activeHabbit) {
     return;
@@ -80,8 +82,31 @@ function rerenderHead(activeHabbit) {
     activeHabbit.days.length / activeHabbit.target > 1
       ? 100
       : (activeHabbit.days.length / activeHabbit.target) * 100;
-  page.header.progressPrecent.innerHTML = progress.toFixed(0) + '%'
-  page.header.progressCoverBar.setAttribute('style', `width: ${progress}%`)
+  page.header.progressPrecent.innerHTML = progress.toFixed(0) + '%';
+  page.header.progressCoverBar.setAttribute('style', `width: ${progress}%`);
+}
+
+/* Рендер дней с комментарием */
+function rerenderDays(activeHabbit) {
+  /* очишение дней при рендере */
+  page.content.daysContainer.innerHTML = '';
+
+  for (const idxDay in activeHabbit.days) {
+    const day = document.createElement('div');
+    day.classList.add('habbit');
+    day.innerHTML = `
+            <div class="habbit__day">День ${Number(idxDay) + 1}</div>
+            <div class="habbit__comment">${
+              activeHabbit.days[idxDay].comment
+            }</div>
+            <button class="habbit__delete-btn">
+              <img src="./images/delete.svg" alt="delete">
+            </button>
+    `;
+    page.content.daysContainer.appendChild(day);
+  }
+  /* Новый день */
+  page.content.nextDay.innerText = `День ${activeHabbit.days.length + 1}`;
 }
 
 /* Рендер всей страницы - приходит id */
@@ -89,6 +114,7 @@ function rerender(activeHabbitId) {
   const activeHabbit = habbits.find((habbit) => habbit.id === activeHabbitId);
   rerenderMenu(activeHabbit);
   rerenderHead(activeHabbit);
+  rerenderDays(activeHabbit);
 }
 
 /* Инициализация приложения IIFE */
