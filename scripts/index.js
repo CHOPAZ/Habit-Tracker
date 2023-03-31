@@ -37,11 +37,6 @@ function saveData() {
 
 /* Рендер левого меню - приходит целый объект привычки */
 function rerenderMenu(activeHabbit) {
-  /* Проверка на активное меню */
-  if (!activeHabbit) {
-    return;
-  }
-
   for (const habbit of habbits) {
     const existed = document.querySelector(`[menu-button-id="${habbit.id}"]`);
 
@@ -71,9 +66,6 @@ function rerenderMenu(activeHabbit) {
 
 /* Рендер шапки */
 function rerenderHead(activeHabbit) {
-  if (!activeHabbit) {
-    return;
-  }
   /* рендер заголовка */
   page.header.h1.innerText = activeHabbit.name;
 
@@ -112,6 +104,9 @@ function rerenderDays(activeHabbit) {
 /* Рендер всей страницы - приходит id */
 function rerender(activeHabbitId) {
   const activeHabbit = habbits.find((habbit) => habbit.id === activeHabbitId);
+  if (!activeHabbit) {
+    return;
+  }
   rerenderMenu(activeHabbit);
   rerenderHead(activeHabbit);
   rerenderDays(activeHabbit);
