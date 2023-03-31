@@ -7,8 +7,14 @@ const HEBBIT_KEY = 'HEBBIT_KEY';
 /* Объект с полученными элементами */
 
 const page = {
-  menu: document.querySelector('.menu__list'),
+  menu: document.querySelector('.menu__list') /* блок левого меню */,
+  header: {
+    h1: document.querySelector('h1'),
+    progressPrecent: document.querySelector('.progres__precent'),
+    progressCoverBar: document.querySelector('.progress__cover-bar'),
+  },
 };
+console.log(page.header.h1);
 
 /* Загрузка данных */
 function loadData() {
@@ -60,10 +66,29 @@ function rerenderMenu(activeHabbit) {
   }
 }
 
+/* Рендер шапки */
+
+function rerenderHead(activeHabbit) {
+  if (!activeHabbit) {
+    return;
+  }
+  /* рендер заголовка */
+  page.header.h1.innerText = activeHabbit.name;
+
+  /* рендер прогресса */
+  const progress =
+    activeHabbit.days.length / activeHabbit.target > 1
+      ? 100
+      : (activeHabbit.days.length / activeHabbit.target) * 100;
+  page.header.progressPrecent.innerHTML = progress.toFixed(0) + '%'
+  page.header.progressCoverBar.setAttribute('style', `width: ${progress}%`)
+}
+
 /* Рендер всей страницы - приходит id */
 function rerender(activeHabbitId) {
   const activeHabbit = habbits.find((habbit) => habbit.id === activeHabbitId);
   rerenderMenu(activeHabbit);
+  rerenderHead(activeHabbit);
 }
 
 /* Инициализация приложения IIFE */
