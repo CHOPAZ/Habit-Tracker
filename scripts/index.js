@@ -3,7 +3,6 @@
 let habbits = []; // Состояние приложения
 let globalActiveHabbitId; // id текущей привычки
 
-
 const HEBBIT_KEY = 'HEBBIT_KEY';
 
 /* Объект с полученными элементами */
@@ -17,7 +16,7 @@ const page = {
   },
   content: {
     daysContainer: document.getElementById('days'),
-    nextDay: document.querySelector('.habbit__day')
+    nextDay: document.querySelector('.habbit__day'),
   },
 };
 
@@ -87,7 +86,7 @@ function rerenderDays(activeHabbit) {
     day.innerHTML = `
     <div class="habbit__day">День ${Number(idxDay) + 1}</div>
     <div class="habbit__comment">${activeHabbit.days[idxDay].comment}</div>
-    <button class="habbit__delete-btn">
+    <button class="habbit__delete-btn" onclick="removeDay(${idxDay})">
     <img src="./images/delete.svg" alt="delete">
     </button>
     `;
@@ -122,6 +121,22 @@ function addDay(event) {
 
   /* Очистка формы */
   form['comment'].value = '';
+  rerender(globalActiveHabbitId);
+  saveData();
+}
+
+/* Удаление дней */
+function removeDay(id) {
+  habbits = habbits.map((habbit) => {
+    if (habbit.id === globalActiveHabbitId) {
+      habbit.days.splice(id, 1);
+      return {
+        ...habbit,
+        day: habbit.days,
+      };
+    }
+    return habbit;
+  });
   rerender(globalActiveHabbitId);
   saveData();
 }
