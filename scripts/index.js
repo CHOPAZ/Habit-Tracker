@@ -1,6 +1,7 @@
 'use strict';
 
 let habbits = []; // Состояние приложения
+let globalActiveHabbitId; // id текущей привычки
 
 
 const HEBBIT_KEY = 'HEBBIT_KEY';
@@ -16,8 +17,7 @@ const page = {
   },
   content: {
     daysContainer: document.getElementById('days'),
-    nextDay: document.querySelector('.habbit__day'),
-    form: document.querySelector('.habbit__form'),
+    nextDay: document.querySelector('.habbit__day')
   },
 };
 
@@ -93,8 +93,6 @@ function rerenderDays(activeHabbit) {
     `;
     page.content.daysContainer.appendChild(day);
   }
-  /* Присвоение id привычки форме для дальнейшего использования */
-  page.content.form.setAttribute('habbit-form-id', activeHabbit.id);
   /* Новый день */
   page.content.nextDay.innerText = `День ${activeHabbit.days.length + 1}`;
 }
@@ -105,7 +103,6 @@ function addDay(event) {
   const form = event.target;
   const data = new FormData(event.target);
   const comment = data.get('comment');
-  const formId = page.content.form.getAttribute('habbit-form-id');
   /* Если форма пустая или не пустая */
   form['comment'].classList.remove('habbit__input_error');
   if (!comment) {
@@ -114,7 +111,7 @@ function addDay(event) {
   }
 
   habbits = habbits.map((habbit) => {
-    if (habbit.id == formId) {
+    if (habbit.id == globalActiveHabbitId) {
       return {
         ...habbit,
         days: habbit.days.concat([{ comment }]),
@@ -131,6 +128,7 @@ function addDay(event) {
 
 /* Рендер всей страницы - приходит id */
 function rerender(activeHabbitId) {
+  globalActiveHabbitId = activeHabbitId;
   const activeHabbit = habbits.find((habbit) => habbit.id === activeHabbitId);
   if (!activeHabbit) {
     return;
