@@ -2,6 +2,7 @@
 
 let habbits = []; // Состояние приложения
 
+
 const HEBBIT_KEY = 'HEBBIT_KEY';
 
 /* Объект с полученными элементами */
@@ -16,6 +17,7 @@ const page = {
   content: {
     daysContainer: document.getElementById('days'),
     nextDay: document.querySelector('.habbit__day'),
+    form: document.querySelector('.habbit__form'),
   },
 };
 
@@ -23,7 +25,6 @@ const page = {
 function loadData() {
   const habbitsString = localStorage.getItem(HEBBIT_KEY);
   const habbitArray = JSON.parse(habbitsString);
-
   /* Проверка на массив */
   if (Array.isArray(habbitArray)) {
     habbits = habbitArray;
@@ -39,7 +40,6 @@ function saveData() {
 function rerenderMenu(activeHabbit) {
   for (const habbit of habbits) {
     const existed = document.querySelector(`[menu-button-id="${habbit.id}"]`);
-
     /* Если элемент не найден */
     if (!existed) {
       const btn = document.createElement('button');
@@ -68,7 +68,6 @@ function rerenderMenu(activeHabbit) {
 function rerenderHead(activeHabbit) {
   /* рендер заголовка */
   page.header.h1.innerText = activeHabbit.name;
-
   /* рендер прогресса */
   const progress =
     activeHabbit.days.length / activeHabbit.target > 1
@@ -82,23 +81,52 @@ function rerenderHead(activeHabbit) {
 function rerenderDays(activeHabbit) {
   /* очишение дней при рендере */
   page.content.daysContainer.innerHTML = '';
-
   for (const idxDay in activeHabbit.days) {
     const day = document.createElement('div');
     day.classList.add('habbit');
     day.innerHTML = `
-            <div class="habbit__day">День ${Number(idxDay) + 1}</div>
-            <div class="habbit__comment">${
-              activeHabbit.days[idxDay].comment
-            }</div>
-            <button class="habbit__delete-btn">
-              <img src="./images/delete.svg" alt="delete">
-            </button>
+    <div class="habbit__day">День ${Number(idxDay) + 1}</div>
+    <div class="habbit__comment">${activeHabbit.days[idxDay].comment}</div>
+    <button class="habbit__delete-btn">
+    <img src="./images/delete.svg" alt="delete">
+    </button>
     `;
     page.content.daysContainer.appendChild(day);
   }
+  /* Присвоение id привычки форме для дальнейшего использования */
+  page.content.form.setAttribute('habbit-form-id', activeHabbit.id);
   /* Новый день */
   page.content.nextDay.innerText = `День ${activeHabbit.days.length + 1}`;
+}
+
+/* Добавление нового дня  */
+function addDay(event) {
+  event.preventDefault();
+  const form = event.target;
+  const data = new FormData(event.target);
+  const comment = data.get('comment');
+  const formId = page.content.form.getAttribute('habbit-form-id');
+  /* Если форма пустая или не пустая */
+  form['comment'].classList.remove('habbit__input_error');
+  if (!comment) {
+    form['comment'].classList.add('habbit__input_error');
+    return;
+  }
+
+  habbits = habbits.map((habbit) => {
+    if (habbit.id == formId) {
+      return {
+        ...habbit,
+        days: habbit.days.concat([{ comment }]),
+      };
+    }
+    return habbit;
+  });
+
+  /* Очистка формы */
+  form['comment'].value = '';
+  rerender(globalActiveHabbitId);
+  saveData();
 }
 
 /* Рендер всей страницы - приходит id */

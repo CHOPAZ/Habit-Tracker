@@ -192,7 +192,7 @@ main {
 	filter: brightness(0) invert(1);
 }
 
-/* add day 2 form */
+/* Форма добавления нового дня */
 
 .habbit__form {
   display: flex;
@@ -214,12 +214,18 @@ main {
 	line-height: 16px;
 }
 
+
 .habbit__input::placeholder {
 	color: #8899A8;
   /* padding-left: 45px; */
 }
 
-/* add day 2 button */
+/* err input */
+.habbit__input_error {
+	border: 1px solid red;
+}
+
+/* Кнопка добавления нового дня */
 
 .habbit__add-btn {
   background: #EDECFE;
