@@ -202,11 +202,11 @@ main {
   position: relative;
 }
 
-.habbit__input {
+input{
   background: #FFFFFF;
 	border: 1px solid #E7EBFB;
 	border-radius: 9px;
-	padding: 12px 45px;
+	padding: 12px 20px;
 	font-family: 'Comfortaa', cursive;
 	flex: 1;
 	font-weight: 400;
@@ -215,9 +215,8 @@ main {
 }
 
 
-.habbit__input::placeholder {
+input::placeholder {
 	color: #8899A8;
-  /* padding-left: 45px; */
 }
 
 /* err input */
@@ -244,8 +243,114 @@ main {
 	color: #ededf5
 }
 
+.habbit__input {
+	padding-left: 45px;
+}
+
 .habbit__input-icon {
   position: absolute;
   top: 12px;
   left: 45px;
+}
+
+/* popup */
+
+.cover {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.25);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* .cover_hidden {
+	display: none;
+} */
+
+.popup {
+	background: #FFFFFF;
+	box-shadow: 0px 8px 14px 12px rgba(56, 56, 56, 0.05);
+	border-radius: 10px;
+	max-width: 600px;
+	width: 100%;
+	padding: 20px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.popup__close {
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.popup__header {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 27px;
+	color: #000000;
+	margin: 0;
+	margin-bottom: 20px;
+}
+
+.popup__icon-label {
+	font-size: 14px;
+	line-height: 16px;
+	color: #768396;
+	margin-bottom: 10px;
+}
+
+.popup__icon-select {
+	display: flex;
+	gap: 25px;
+	margin-bottom: 20px;
+}
+
+.popup__icon-btn {
+	border: 1px solid #5051F9;
+	border-radius: 14px;
+	width: 45px;
+	height: 45px;
+	background: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.popup__icon-btn_active {
+	background: #5051F9;
+}
+
+.popup__icon-btn_active img {
+	filter: brightness(0) invert(1);
+}
+
+.popup__icon-btn:hover {
+	background: #6A6AFB;
+}
+
+.popup__icon-btn:hover img {
+	filter: brightness(0) invert(1);
+}
+
+.popup__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+}
+
+.popup__form input {
+	width: 100%;
 }

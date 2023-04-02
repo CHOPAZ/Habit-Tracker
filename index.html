@@ -49,6 +49,31 @@
           </form>
         </div>
       </main>
+      <div class="cover cover_hidden">
+        <div class="popup">
+          <h2 class="popup__header">Новая привычка</h2>
+          <div class="popup__icon-label">Иконка</div>
+          <div class="popup__icon-select">
+            <button class="popup__icon-btn popup__icon-btn_active">
+              <img src="./images/sport.svg" alt="Sport">
+            </button>
+            <button class="popup__icon-btn">
+              <img src="./images/Water.svg" alt="Water">
+            </button>
+            <button class="popup__icon-btn">
+              <img src="./images/Food.svg" alt="Food">
+          </div>
+          <form class="popup__form">
+            <input type="text" name="name" placeholder="Название">
+            <input type="number" name="target" placeholder="Цель">
+            <input type="text" name="icon" placeholder="Иконка" hidden>
+            <button class="habbit__add-btn" type="submit">Добавить</button>
+          </form>
+          <button class="popup__close">
+            <img src="./images/Close.svg" alt="Close">
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <script src="./scripts/index.js"></script>
