@@ -18,7 +18,7 @@
         <div class="menu__list">
           <!-- рендер иконок меню -->
         </div>
-        <button class="menu__add-item">
+        <button class="menu__add-item" onclick="togglePopup()">
           <img src="./images/add.svg" alt="add new item">
         </button>
       </nav>
@@ -49,7 +49,7 @@
           </form>
         </div>
       </main>
-      <div class="cover cover_hidden">
+      <div id="hebbit-popup" class="cover cover_hidden">
         <div class="popup">
           <h2 class="popup__header">Новая привычка</h2>
           <div class="popup__icon-label">Иконка</div>
@@ -69,7 +69,7 @@
             <input type="text" name="icon" placeholder="Иконка" hidden>
             <button class="habbit__add-btn" type="submit">Добавить</button>
           </form>
-          <button class="popup__close">
+          <button class="popup__close" onclick="togglePopup()">
             <img src="./images/Close.svg" alt="Close">
           </button>
         </div>

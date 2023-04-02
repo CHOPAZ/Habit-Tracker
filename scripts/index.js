@@ -18,6 +18,10 @@ const page = {
     daysContainer: document.getElementById('days'),
     nextDay: document.querySelector('.habbit__day'),
   },
+  popup: {
+    id: document.getElementById('hebbit-popup'),
+    iconField: document.querySelector('.popup__form input[name="icon"]'),
+  },
 };
 
 /* Загрузка данных */
@@ -139,6 +143,15 @@ function removeDay(id) {
   });
   rerender(globalActiveHabbitId);
   saveData();
+}
+
+/* Появленеи popup */
+function togglePopup() {
+  if (page.popup.id.classList.contains('cover_hidden')) {
+    page.popup.id.classList.remove('cover_hidden');
+  } else {
+    page.popup.id.classList.add('cover_hidden');
+  }
 }
 
 /* Рендер всей страницы - приходит id */
