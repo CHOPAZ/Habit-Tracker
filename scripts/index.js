@@ -225,6 +225,7 @@ function rerender(activeHabbitId) {
   if (!activeHabbit) {
     return;
   }
+  document.location.replace(document.location.pathname + '#' + activeHabbitId);
   rerenderMenu(activeHabbit);
   rerenderHead(activeHabbit);
   rerenderDays(activeHabbit);
@@ -233,5 +234,13 @@ function rerender(activeHabbitId) {
 /* Инициализация приложения IIFE */
 (() => {
   loadData();
-  rerender(habbits[0].id); // начальньый активный habbit
+  const hashId = Number(document.location.hash.replace('#', ''));
+  const urlHabbit = habbits.find(habbit => habbit.id === hashId);
+  console.log(urlHabbit);
+  if (urlHabbit) {
+    rerender(urlHabbit.id)
+  } else {
+    rerender(habbits[0].id)
+  }
+
 })();
