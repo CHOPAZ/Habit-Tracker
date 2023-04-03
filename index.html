@@ -63,7 +63,7 @@
             <button class="popup__icon-btn" onclick="selectionIcon('food', this)">
               <img src="./images/food.svg" alt="Food">
           </div>
-          <form class="popup__form">
+          <form class="popup__form" onsubmit="addHabbit(event)">
             <input type="text" name="name" placeholder="Название">
             <input type="number" name="target" placeholder="Цель">
             <input type="text" name="icon" hidden value="sport">

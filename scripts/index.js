@@ -39,6 +39,42 @@ function saveData() {
   localStorage.setItem(HEBBIT_KEY, JSON.stringify(habbits));
 }
 
+/* Валидация и возврат данных
+  fields - список полей (name, comment)
+*/
+function validateAndGetFormData(form, fields) {
+  const formData = new FormData(form);
+  const res = {};
+  for (const field of fields) {
+    const fieldValue = formData.get(field);
+    /* Если форма пустая или не пустая */
+    form[field].classList.remove('error');
+    if (!fieldValue) {
+      form[field].classList.add('error');
+    }
+    res[field] = fieldValue;
+  }
+
+  /* Проверка на валидность формы */
+  let isValid = true;
+  for (const field of fields) {
+    if (!res[field]) {
+      isValid = false;
+    }
+  }
+  if (!isValid) {
+    return;
+  }
+  return res;
+}
+
+/* Сброс формы */
+function resetForm(form, fields) {
+  for (const field of fields) {
+    form[field].value = '';
+  }
+}
+
 /* Рендер левого меню - приходит целый объект привычки */
 function rerenderMenu(activeHabbit) {
   for (const habbit of habbits) {
@@ -103,28 +139,22 @@ function rerenderDays(activeHabbit) {
 /* Добавление нового дня  */
 function addDay(event) {
   event.preventDefault();
-  const form = event.target;
-  const data = new FormData(event.target);
-  const comment = data.get('comment');
-  /* Если форма пустая или не пустая */
-  form['comment'].classList.remove('habbit__input_error');
-  if (!comment) {
-    form['comment'].classList.add('habbit__input_error');
+  const data = validateAndGetFormData(event.target, ['comment']);
+  if (!data) {
     return;
   }
-
   habbits = habbits.map((habbit) => {
     if (habbit.id == globalActiveHabbitId) {
       return {
         ...habbit,
-        days: habbit.days.concat([{ comment }]),
+        days: habbit.days.concat([{ comment: data.comment }]),
       };
     }
     return habbit;
   });
 
   /* Очистка формы */
-  form['comment'].value = '';
+  resetForm(event.target, ['comment']);
   rerender(globalActiveHabbitId);
   saveData();
 }
@@ -154,7 +184,7 @@ function togglePopup() {
   }
 }
 
-/* Установка новой иконки в инпут (в popup) */
+/* Установка новой активной иконки в инпут (в popup) */
 function selectionIcon(icon, context) {
   page.popup.iconField.value = icon;
   const activeIcon = document.querySelector(
@@ -162,7 +192,30 @@ function selectionIcon(icon, context) {
   );
   activeIcon.classList.remove('popup__icon-btn_active');
   context.classList.add('popup__icon-btn_active');
-  
+}
+
+/* Добавление новой привычки в popup */
+function addHabbit(event) {
+  event.preventDefault();
+  const data = validateAndGetFormData(event.target, ['name', 'icon', 'target']);
+  if (!data) {
+    return;
+  }
+  const maxId = habbits.reduce(
+    (acc, habbit) => (acc > habbit.id ? acc : habbit.id),
+    0
+  );
+  habbits.push({
+    id: maxId + 1,
+    name: data.name,
+    icon: data.icon,
+    target: data.target,
+    days: [],
+  });
+  resetForm(event.target, ['name', 'icon', 'target']);
+  togglePopup();
+  saveData();
+  rerender(maxId + 1)
 }
 
 /* Рендер всей страницы - приходит id */
