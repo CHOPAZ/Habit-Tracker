@@ -154,6 +154,17 @@ function togglePopup() {
   }
 }
 
+/* Установка новой иконки в инпут (в popup) */
+function selectionIcon(icon, context) {
+  page.popup.iconField.value = icon;
+  const activeIcon = document.querySelector(
+    '.popup__icon-btn.popup__icon-btn_active'
+  );
+  activeIcon.classList.remove('popup__icon-btn_active');
+  context.classList.add('popup__icon-btn_active');
+  
+}
+
 /* Рендер всей страницы - приходит id */
 function rerender(activeHabbitId) {
   globalActiveHabbitId = activeHabbitId;
